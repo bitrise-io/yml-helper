@@ -1,10 +1,10 @@
 export class RequestService {
   static libraryFetch(libraryURLs, mode = 'website') {
     return new Promise((resolve, reject) => {
-      var request = new XMLHttpRequest();
+      const request = new XMLHttpRequest();
 
-      var requestMethod;
-      var requestURL;
+      let requestMethod;
+      let requestURL;
       switch (mode) {
         case 'website':
           requestMethod = 'get';
@@ -20,7 +20,7 @@ export class RequestService {
       request.open(requestMethod, requestURL);
 
       request.setRequestHeader('Content-Type', 'application/json');
-      var requestData = {};
+      let requestData = {};
       if (libraryURLs) {
         requestData = {
           libraries: libraryURLs
@@ -29,10 +29,10 @@ export class RequestService {
 
       request.onload = () => {
         if (request.status === 200) {
-          var responseData = JSON.parse(request.response);
+          const responseData = JSON.parse(request.response);
           switch (mode) {
             case 'website':
-              var libraryMap = {};
+              const libraryMap = {};
               libraryMap[responseData.steplib_source] = responseData;
 
               resolve(libraryMap);

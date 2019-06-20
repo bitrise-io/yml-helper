@@ -12,9 +12,9 @@ export class Workflow {
     }
 
     this.steps = _.map(workflowConfig.steps, function(aWrappedUserStepConfig) {
-      var stepCVS = Step.cvsFromWrappedStepConfig(aWrappedUserStepConfig);
-      var step;
-      var userStepConfig = aWrappedUserStepConfig[stepCVS];
+      const stepCVS = Step.cvsFromWrappedStepConfig(aWrappedUserStepConfig);
+      let step;
+      const userStepConfig = aWrappedUserStepConfig[stepCVS];
 
       try {
         step = stepSourceService.stepFromCVS(stepCVS);

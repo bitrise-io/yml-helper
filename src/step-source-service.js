@@ -19,7 +19,7 @@ export class StepSourceService {
 
   loadLibrariesWithURLs(libraryURLs = []) {
     return new Promise((resolve, reject) => {
-      var notLoadedLibraryURLs = _.reject(_.uniq(libraryURLs.concat(this.defaultLibraryURL)), aLibraryURL => {
+      const notLoadedLibraryURLs = _.reject(_.uniq(libraryURLs.concat(this.defaultLibraryURL)), aLibraryURL => {
         return _.find(this.libraries, {
           url: aLibraryURL
         });
@@ -35,11 +35,11 @@ export class StepSourceService {
         data => {
           _.each(data, (aLibraryData, aLibraryURL) => {
             try {
-              var library = {
+              const library = {
                 url: aLibraryURL
               };
 
-              var stepIDs = _.keys(aLibraryData.steps).sort();
+              const stepIDs = _.keys(aLibraryData.steps).sort();
 
               library.steps = {};
               library.latestStepVersions = {};
@@ -48,9 +48,9 @@ export class StepSourceService {
                 library.steps[aStepID] = {};
                 library.latestStepVersions[aStepID] = aLibraryData.steps[aStepID].latest_version_number;
                 library.steps[aStepID] = _.mapObject(aLibraryData.steps[aStepID].versions, (aStepConfig, version) => {
-                  var cvs = aStepID + '@' + version;
+                  const cvs = aStepID + '@' + version;
 
-                  var step = this.stepFromCVS(cvs);
+                  const step = this.stepFromCVS(cvs);
                   step.defaultStepConfig = aStepConfig;
 
                   return step;
@@ -83,15 +83,15 @@ export class StepSourceService {
   }
 
   stepFromCVS(cvs) {
-    var step = new Step(cvs);
+    const step = new Step(cvs);
 
-    var idStartIndex = cvs.indexOf('::') != -1 ? cvs.indexOf('::') + 2 : 0;
-    var versionStartIndex =
+    const idStartIndex = cvs.indexOf('::') != -1 ? cvs.indexOf('::') + 2 : 0;
+    const versionStartIndex =
       cvs.lastIndexOf('@') != -1 && cvs.indexOf('::') < cvs.lastIndexOf('@') ? cvs.lastIndexOf('@') + 1 : -1;
 
-    var source = idStartIndex > 0 && cvs.slice(0, idStartIndex - 2).length > 0 ? cvs.slice(0, idStartIndex - 2) : null;
-    var id = cvs.slice(idStartIndex, versionStartIndex != -1 ? versionStartIndex - 1 : undefined);
-    var version = versionStartIndex != -1 && versionStartIndex != cvs.length ? cvs.slice(versionStartIndex) : null;
+    const source = idStartIndex > 0 && cvs.slice(0, idStartIndex - 2).length > 0 ? cvs.slice(0, idStartIndex - 2) : null;
+    const id = cvs.slice(idStartIndex, versionStartIndex != -1 ? versionStartIndex - 1 : undefined);
+    const version = versionStartIndex != -1 && versionStartIndex != cvs.length ? cvs.slice(versionStartIndex) : null;
 
     switch (source) {
       case 'path':
@@ -101,7 +101,7 @@ export class StepSourceService {
 
         step.localPath = id;
 
-        var localStep = _.find(this.localSteps, {
+        const localStep = _.find(this.localSteps, {
           localPath: step.localPath
         });
 
@@ -118,7 +118,7 @@ export class StepSourceService {
         step.gitURL = id;
         step.version = version;
 
-        var gitStep = _.find(this.gitSteps, {
+        const gitStep = _.find(this.gitSteps, {
           gitURL: step.gitURL,
           version: step.version
         });
@@ -141,7 +141,7 @@ export class StepSourceService {
         step.id = id;
         step.version = version;
 
-        var library = _.find(this.libraries, {
+        const library = _.find(this.libraries, {
           url: step.libraryURL
         });
 
@@ -153,7 +153,7 @@ export class StepSourceService {
           throw new Error(`Step with ID not found in library: ${step.id}`);
         }
 
-        var requestedVersion = step.version ? step.version : library.latestStepVersions[step.id];
+        const requestedVersion = step.version ? step.version : library.latestStepVersions[step.id];
 
         if (!library.steps[step.id][requestedVersion]) {
           throw new Error(`Step with version not found in library: ${requestedVersion}`);
@@ -168,14 +168,14 @@ export class StepSourceService {
 
   versionsOfStep(step) {
     if (step.libraryURL !== undefined) {
-      var library = _.find(this.libraries, {
+      const library = _.find(this.libraries, {
         url: step.libraryURL
       });
 
       return _.sortBy(_.keys(library.steps[step.id]), function(version) {
         return _.map(version.split('.'), function(aVersionPart) {
-          var pad = '000000';
-          var versionPartWithLeadingZeros = pad.substring(0, pad.length - aVersionPart.length) + aVersionPart;
+          const pad = '000000';
+          const versionPartWithLeadingZeros = pad.substring(0, pad.length - aVersionPart.length) + aVersionPart;
 
           return versionPartWithLeadingZeros;
         }).join('.');
@@ -189,7 +189,7 @@ export class StepSourceService {
 
   isLatestStepVersion(step) {
     if (step.libraryURL !== undefined) {
-      var library = _.find(this.libraries, {
+      const library = _.find(this.libraries, {
         url: step.libraryURL
       });
 
@@ -202,7 +202,7 @@ export class StepSourceService {
   }
 
   isStepAtLeastOnVersion(step, version) {
-    var versions = this.versionsOfStep(step);
+    const versions = this.versionsOfStep(step);
 
     return versions.indexOf(step.version) <= versions.indexOf(version);
   }
