@@ -1,11 +1,13 @@
 {
-  "name": "yml-helper",
+  "name": "@bitrise/yml-helper",
   "main": "bundle-umd.js",
   "module": "bundle-es.js",
   "version": "1.0.0",
+  "description": "Helper for parsing Bitrise apps' bitrise.yml",
   "scripts": {
     "build": "rollup -c"
   },
+  "author": "József Erős <jozsef.eros@bitrise.io>",
   "devDependencies": {
     "@babel/core": "^7.4.5",
     "@babel/preset-env": "^7.4.5",
