@@ -2,7 +2,7 @@
 NPM package for parsing Bitrise apps' bitrise.yml
 
 ### Example code
-```
+```js
 import { StepSourceService, App } from 'yml-helper';
 
 const bitriseYml = `
