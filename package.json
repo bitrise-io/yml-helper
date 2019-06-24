@@ -1,0 +1,22 @@
+{
+  "name": "yml-helper",
+  "main": "bundle-umd.js",
+  "module": "bundle-es.js",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "rollup -c"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.4.5",
+    "@babel/preset-env": "^7.4.5",
+    "rollup": "^1.15.6",
+    "rollup-plugin-babel": "^4.3.2",
+    "rollup-plugin-json": "^4.0.0",
+    "rollup-plugin-node-resolve": "^5.0.2"
+  },
+  "dependencies": {
+    "js-yaml": "^3.13.1",
+    "pkg": "^4.4.0",
+    "underscore": "^1.9.1"
+  }
+}
