@@ -1,4 +1,4 @@
-const _ = require('underscore');
+import _ from 'underscore';
 
 import { Step } from './step';
 

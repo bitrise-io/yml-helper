@@ -1,4 +1,4 @@
-const _ = require('underscore');
+import _ from 'underscore';
 
 import { RequestService } from './request-service';
 import { Step } from './step';
@@ -89,7 +89,8 @@ export class StepSourceService {
     const versionStartIndex =
       cvs.lastIndexOf('@') != -1 && cvs.indexOf('::') < cvs.lastIndexOf('@') ? cvs.lastIndexOf('@') + 1 : -1;
 
-    const source = idStartIndex > 0 && cvs.slice(0, idStartIndex - 2).length > 0 ? cvs.slice(0, idStartIndex - 2) : null;
+    const source =
+      idStartIndex > 0 && cvs.slice(0, idStartIndex - 2).length > 0 ? cvs.slice(0, idStartIndex - 2) : null;
     const id = cvs.slice(idStartIndex, versionStartIndex != -1 ? versionStartIndex - 1 : undefined);
     const version = versionStartIndex != -1 && versionStartIndex != cvs.length ? cvs.slice(versionStartIndex) : null;
 
