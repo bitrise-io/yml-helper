@@ -1,4 +1,4 @@
-const _ = require('underscore');
+import _ from 'underscore';
 
 export class Step {
   constructor(cvs, userStepConfig, defaultStepConfig) {

@@ -1,5 +1,5 @@
-const _ = require('underscore');
-const yaml = require('js-yaml');
+import _ from 'underscore';
+import yaml from 'js-yaml';
 
 import { Workflow } from './workflow';
 
