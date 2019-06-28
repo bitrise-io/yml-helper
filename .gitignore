@@ -1,3 +1,2 @@
 node_modules
-bundle-es.js
-bundle-umd.js
+dist/
